@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { PasswordManagerService } from '../_services/password-manager.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-site-list',
@@ -26,7 +27,7 @@ export class SiteListComponent {
 
   formState: string = "Add New";
 
-  constructor(private passwordManagerService: PasswordManagerService) {
+  constructor(private passwordManagerService: PasswordManagerService, private toastr: ToastrService) {
     this.loadSites();
   }
 
@@ -37,21 +38,33 @@ export class SiteListComponent {
     if(this.formState == "Add New") {
       this.passwordManagerService.addSite(values)
       .then(() => {
-        console.log('Data Saved Successfully');
+        this.toastr.success('Data Saved Successfully!', 'SUCCESS', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right'
+        } );
         this.loadSites();
       })
       .catch(err => {
-        console.log(err);
+        this.toastr.error(err.error, 'ERROR!', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right'
+        } );
       });
     }
     else if(this.formState == "Edit") {
       // Update existing document in Firestore DB
       this.passwordManagerService.updateSite(this.id, values)
       .then(() => {
-        console.log('Data Updated');
+        this.toastr.success('Data Updated', 'SUCCESS', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right'
+        } );
       })
       .catch(err => {
-        console.log(err);
+        this.toastr.error(err.error, 'ERROR!', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right'
+        } );
       });
     }    
   }
@@ -72,10 +85,16 @@ export class SiteListComponent {
   deleteSite(id: string) {
     this.passwordManagerService.deleteSite(id)
     .then(() => {
-      console.log('Data Deleted');
+      this.toastr.success('Data Deleted', 'SUCCESS', {
+        timeOut: 5000,
+        positionClass: 'toast-bottom-right'
+      } );
     })
     .catch(err => {
-      console.log(err);
+      this.toastr.error(err.error, 'ERROR!', {
+        timeOut: 5000,
+        positionClass: 'toast-bottom-right'
+      } );
     });
   }
 }
