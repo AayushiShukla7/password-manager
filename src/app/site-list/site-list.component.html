@@ -60,7 +60,8 @@
                 (click)="editSite(site.siteName, site.siteUrl, site.siteImageUrl, site.id)">
                 Edit
             </button>
-            <button class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md">
+            <button class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+                    (click)="deleteSite(site.id)">
                 Delete
             </button>
         </div>

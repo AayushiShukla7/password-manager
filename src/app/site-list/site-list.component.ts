@@ -68,4 +68,14 @@ export class SiteListComponent {
 
     this.formState = "Edit";
   }
+
+  deleteSite(id: string) {
+    this.passwordManagerService.deleteSite(id)
+    .then(() => {
+      console.log('Data Deleted');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
 }
