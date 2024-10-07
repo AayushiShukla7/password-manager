@@ -18,6 +18,10 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class SiteListComponent {
 
   allSites !: Observable<Array<any>>;
+  siteName !: string;
+  siteUrl !: string;
+  siteImageUrl !: string;
+  siteId !: string;
 
   constructor(private passwordManagerService: PasswordManagerService) {
     this.loadSites();
@@ -36,5 +40,12 @@ export class SiteListComponent {
 
   loadSites() {
     this.allSites = this.passwordManagerService.loadSites();
+  }
+
+  editSite(siteName: string, siteUrl: string, siteImageUrl: string, siteId: string) {
+    this.siteId = siteId;
+    this.siteName = siteName;
+    this.siteUrl = siteUrl;
+    this.siteImageUrl = siteImageUrl;
   }
 }
