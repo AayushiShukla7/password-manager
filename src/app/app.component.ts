@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     NavbarComponent,
     SiteListComponent,
+    //BrowserAnimationsModule, // required animations module
     ToastrModule, // ToastrModule added
   ],
   templateUrl: './app.component.html',

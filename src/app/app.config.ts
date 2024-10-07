@@ -15,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp({"projectId":"password-manager-ce0a5","appId":"1:923054135502:web:550ee0193dca3fce13189f","storageBucket":"password-manager-ce0a5.appspot.com","apiKey":"AIzaSyDqmWecEmDJHpbz9jo92hwC6_9mIBjXcKQ","authDomain":"password-manager-ce0a5.firebaseapp.com","messagingSenderId":"923054135502"})), 
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
+    provideAnimations(), // required animations providers
     provideToastr(), // Toastr providers
   ]
 };
