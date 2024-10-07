@@ -18,17 +18,24 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class SiteListComponent {
 
   allSites !: Observable<Array<any>>;
+
   siteName !: string;
   siteUrl !: string;
   siteImageUrl !: string;
-  siteId !: string;
+  id !: string;
+
+  formState: string = "Add New";
 
   constructor(private passwordManagerService: PasswordManagerService) {
     this.loadSites();
   }
 
   onSubmit(values: object) {
-    this.passwordManagerService.addSite(values)
+    // console.log(values);
+
+    // Save new document to Firestore DB
+    if(this.formState == "Add New") {
+      this.passwordManagerService.addSite(values)
       .then(() => {
         console.log('Data Saved Successfully');
         this.loadSites();
@@ -36,16 +43,29 @@ export class SiteListComponent {
       .catch(err => {
         console.log(err);
       });
+    }
+    else if(this.formState == "Edit") {
+      // Update existing document in Firestore DB
+      this.passwordManagerService.updateSite(this.id, values)
+      .then(() => {
+        console.log('Data Updated');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }    
   }
 
   loadSites() {
     this.allSites = this.passwordManagerService.loadSites();
   }
 
-  editSite(siteName: string, siteUrl: string, siteImageUrl: string, siteId: string) {
-    this.siteId = siteId;
+  editSite(siteName: string, siteUrl: string, siteImageUrl: string, id: string) {
+    this.id = id;
     this.siteName = siteName;
     this.siteUrl = siteUrl;
     this.siteImageUrl = siteImageUrl;
+
+    this.formState = "Edit";
   }
 }

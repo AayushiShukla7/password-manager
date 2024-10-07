@@ -4,17 +4,17 @@
     </h1>
     <p class="mb-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere exercitationem totam, consequuntur eos necessitatibus nemo quis facilis. Id, eum. Fugiat amet autem enim doloribus nam in corporis non explicabo ducimus.</p>
     <button class="mb-5 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md">
-        Add New Site
+        {{ formState }} Site
     </button>
 
     <!-- Add New Site Form -->
     <div class="px-20 py-10 mb-10 my-5 border-4 border-gray-900">
         <h2 class="text-3xl text-center">
-            Add New Site
+            {{ formState }} Site
         </h2>
 
         <p class="text-center">
-            You can add a new site from the below form
+            You can {{ formState }} site from the below form
         </p>
 
         <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
@@ -34,7 +34,7 @@
             </div>
 
             <button class="mt-10 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md">
-                Add New Site
+                {{ formState }} Site
             </button>
 
             <button class="mt-10 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md">
@@ -57,7 +57,7 @@
                 Add New Password
             </button>
             <button class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
-                (click)="editSite(site.siteName, site.siteUrl, site.siteImageUrl, site.Id)">
+                (click)="editSite(site.siteName, site.siteUrl, site.siteImageUrl, site.id)">
                 Edit
             </button>
             <button class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md">
