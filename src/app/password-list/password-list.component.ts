@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PasswordManagerService } from '../_services/password-manager.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AES, enc } from 'crypto-js';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-password-list',
@@ -26,7 +28,7 @@ export class PasswordListComponent {
   siteUrl !: string;
   siteImageUrl !: string;
 
-  passwordList !: Observable<Array<any>>;
+  passwordList !:Array<any>;
   
   pwdEmail !: string;
   pwdUsername !: string;
@@ -55,7 +57,10 @@ export class PasswordListComponent {
     this.pwdId = '';
   }
 
-  onSubmit(values: object) {
+  onSubmit(values: any) {
+    const encryptedPassword = this.encryptPassword(this.pwdPassword);
+    values.password = encryptedPassword;
+
     // Save new document to Firestore DB
     if(this.formState == "Add New") {
     this.passwordManagerService.addPassword(values, this.siteId)
@@ -93,7 +98,10 @@ export class PasswordListComponent {
   }
 
   loadPasswords() {
-    this.passwordList = this.passwordManagerService.loadPasswords(this.siteId);
+    this.passwordManagerService.loadPasswords(this.siteId)
+      .subscribe((val: any) => {
+        this.passwordList = val;
+      });
   }
 
   editPassword(email: string, username: string, password: string, id: string) {
@@ -119,5 +127,25 @@ export class PasswordListComponent {
         positionClass: 'toast-top-right'
       } );
     });
+  }
+
+  // Password Encryption & Decryption
+  encryptPassword(password: string) {    
+    const secretKey = environment.secretKey;
+    const encryptedPassword = AES.encrypt(password, secretKey).toString();
+    console.log('Password: ' + password + ' & Encrypted Password: ' + encryptedPassword);
+    return encryptedPassword;
+  }
+
+  onDecrypt(password: string, index: number) {
+    const decryptedPassword = this.decryptPassword(password);
+    console.log('Decrypted Password: ' + decryptedPassword);
+    this.passwordList[index].password = decryptedPassword;
+  }
+
+  decryptPassword(password: string) {
+    const secretKey = environment.secretKey;
+    const decryptedPassword = AES.decrypt(password, secretKey).toString(enc.Utf8);
+    return decryptedPassword;
   }
 }
