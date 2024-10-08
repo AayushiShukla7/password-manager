@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
 import { SiteListComponent } from './site-list/site-list.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 @Component({
@@ -12,7 +10,6 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     RouterOutlet,
     FormsModule,
-    NavbarComponent,
     SiteListComponent,
     //BrowserAnimationsModule, // required animations module
     ToastrModule, // ToastrModule added

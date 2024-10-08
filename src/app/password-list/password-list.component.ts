@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AES, enc } from 'crypto-js';
 import { environment } from '../../environments/environment.development';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-password-list',
@@ -14,7 +15,8 @@ import { environment } from '../../environments/environment.development';
   imports: [
     FormsModule,
     CommonModule,
-    AsyncPipe
+    AsyncPipe,
+    NavbarComponent
   ],
   templateUrl: './password-list.component.html',
   styleUrl: './password-list.component.css'
@@ -133,13 +135,13 @@ export class PasswordListComponent {
   encryptPassword(password: string) {    
     const secretKey = environment.secretKey;
     const encryptedPassword = AES.encrypt(password, secretKey).toString();
-    console.log('Password: ' + password + ' & Encrypted Password: ' + encryptedPassword);
+    //console.log('Password: ' + password + ' & Encrypted Password: ' + encryptedPassword);
     return encryptedPassword;
   }
 
   onDecrypt(password: string, index: number) {
     const decryptedPassword = this.decryptPassword(password);
-    console.log('Decrypted Password: ' + decryptedPassword);
+    //console.log('Decrypted Password: ' + decryptedPassword);
     this.passwordList[index].password = decryptedPassword;
   }
 

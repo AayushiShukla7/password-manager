@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-site-list',
@@ -13,7 +14,8 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     CommonModule,
     AsyncPipe,
-    RouterLink
+    RouterLink,
+    NavbarComponent
   ],
   templateUrl: './site-list.component.html',
   styleUrl: './site-list.component.css'
