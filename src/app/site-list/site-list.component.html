@@ -4,7 +4,7 @@
     <h1 class="text-5xl mt-0 mb-5">
         Angular Password Manager
     </h1>
-    <p class="mb-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere exercitationem totam, consequuntur eos necessitatibus nemo quis facilis. Id, eum. Fugiat amet autem enim doloribus nam in corporis non explicabo ducimus.</p>
+    <p class="mb-5">Save your login passwords for each site you visit. These passwords would be managed in real-time using Firestore database and made with AngularJS 18. Enjoy!</p>
     <button class="mb-5 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md">
         {{ formState }} Site
     </button>
@@ -47,7 +47,12 @@
 
     <div class="grid grid-cols-4 gap-5">
         <div *ngFor="let site of allSites | async" class="shadow-lg border-2 border-gray-900">
-            <img [src]="site.siteImageUrl" [alt]="site.siteName">
+            <div class="mb-4 h-64 w-full">
+                <img
+                  class="h-full w-full object-fill"
+                  [src]="site.siteImageUrl"
+                  [alt]="site.siteName" />
+            </div>
 
             <h3 class="p-3 text-xl font-bold">{{ site.siteName }}</h3>
 
