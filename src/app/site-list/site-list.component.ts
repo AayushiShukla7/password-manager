@@ -4,6 +4,7 @@ import { PasswordManagerService } from '../_services/password-manager.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-site-list',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     FormsModule,
     CommonModule,
-    AsyncPipe
+    AsyncPipe,
+    RouterLink
   ],
   templateUrl: './site-list.component.html',
   styleUrl: './site-list.component.css'
@@ -31,6 +33,14 @@ export class SiteListComponent {
     this.loadSites();
   }
 
+  resetForm() {
+    this.siteName = '';
+    this.siteUrl = '';
+    this.siteImageUrl = '';
+    this.formState = 'Add New';
+    this.id = '';
+  }
+
   onSubmit(values: object) {
     // console.log(values);
 
@@ -43,6 +53,7 @@ export class SiteListComponent {
           positionClass: 'toast-top-right'
         } );
         this.loadSites();
+        this.resetForm();
       })
       .catch(err => {
         this.toastr.error(err.error, 'ERROR!', {
@@ -59,6 +70,7 @@ export class SiteListComponent {
           timeOut: 5000,
           positionClass: 'toast-top-right'
         } );
+        this.resetForm();
       })
       .catch(err => {
         this.toastr.error(err.error, 'ERROR!', {
