@@ -40,14 +40,14 @@ export class SiteListComponent {
       .then(() => {
         this.toastr.success('Data Saved Successfully!', 'SUCCESS', {
           timeOut: 5000,
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-top-right'
         } );
         this.loadSites();
       })
       .catch(err => {
         this.toastr.error(err.error, 'ERROR!', {
           timeOut: 5000,
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-top-right'
         } );
       });
     }
@@ -57,13 +57,13 @@ export class SiteListComponent {
       .then(() => {
         this.toastr.success('Data Updated', 'SUCCESS', {
           timeOut: 5000,
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-top-right'
         } );
       })
       .catch(err => {
         this.toastr.error(err.error, 'ERROR!', {
           timeOut: 5000,
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-top-right'
         } );
       });
     }    
@@ -87,13 +87,13 @@ export class SiteListComponent {
     .then(() => {
       this.toastr.success('Data Deleted', 'SUCCESS', {
         timeOut: 5000,
-        positionClass: 'toast-bottom-right'
+        positionClass: 'toast-top-right'
       } );
     })
     .catch(err => {
       this.toastr.error(err.error, 'ERROR!', {
         timeOut: 5000,
-        positionClass: 'toast-bottom-right'
+        positionClass: 'toast-top-right'
       } );
     });
   }
